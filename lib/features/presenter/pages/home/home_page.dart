@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     setUpHomeBinding();
     getIt<HomeStore>().getPhotos();
   }
@@ -31,9 +32,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         title: const Text(
           'Pexels Clean Arch',
-          style: TextStyle(
-            color: Colors.black45,
-          ),
+          style: TextStyle(color: Colors.black45),
         ),
         elevation: 0,
         leading: Container(
@@ -48,10 +47,10 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: ScopedBuilder(
               store: getIt<HomeStore>(),
-              onLoading: (context) => const Center(
+              onLoading: (_) => const Center(
                 child: CircularProgressIndicator(),
               ),
-              onError: (context, error) {
+              onError: (_, error) {
                 if (error is EmptyParamFailure) {
                   return const Center(
                     child: Text(
@@ -59,17 +58,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 }
-                return Center(
-                  child: Text('Something went wrong: $error'),
-                );
+
+                return Center(child: Text('Something went wrong: $error'));
               },
-              onState: (context, List<PhotoEntity> state) => ListView.separated(
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 16),
+              onState: (_, List<PhotoEntity> state) => ListView.separated(
+                separatorBuilder: (_, __) => const SizedBox(height: 16),
                 padding: const EdgeInsets.all(16),
                 itemCount: state.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (_, index) {
                   final item = state[index];
+
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
                     title: SizedBox(
@@ -80,14 +78,13 @@ class _HomePageState extends State<HomePage> {
                         child: CachedNetworkImage(
                           imageUrl: item.photoUrl,
                           fit: BoxFit.cover,
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Center(
+                          progressIndicatorBuilder: (_, __, downloadProgress) =>
+                              Center(
                             child: CircularProgressIndicator(
                               value: downloadProgress.progress,
                             ),
                           ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                          errorWidget: (_, __, ___) => const Icon(Icons.error),
                         ),
                       ),
                     ),
