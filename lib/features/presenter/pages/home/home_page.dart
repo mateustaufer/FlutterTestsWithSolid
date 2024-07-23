@@ -5,7 +5,8 @@ import 'package:pexels_clean_arch/core/erros/failures.dart';
 import 'package:pexels_clean_arch/features/domain/entities/photo_entity.dart';
 import 'package:pexels_clean_arch/features/presenter/pages/home/home_binding.dart';
 import 'package:pexels_clean_arch/features/presenter/pages/home/home_store.dart';
-import 'package:pexels_clean_arch/features/presenter/pages/home/widgets/search_bar.dart';
+import 'package:pexels_clean_arch/features/presenter/pages/home/widgets/search_bar.dart'
+    as search_bar;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          const SearchBar(),
+          const search_bar.SearchBar(),
           Expanded(
             child: ScopedBuilder(
               store: getIt<HomeStore>(),
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onError: (context, error) {
                 if (error is EmptyParamFailure) {
-                  return Center(
+                  return const Center(
                     child: Text(
                       'Você precisa digitar alguma coisa na pesquisa!',
                     ),
