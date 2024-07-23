@@ -1,9 +1,8 @@
 import 'package:flutter_triple/flutter_triple.dart';
-import 'package:pexels_clean_arch/core/erros/failures.dart';
 import 'package:pexels_clean_arch/features/domain/entities/photo_entity.dart';
 import 'package:pexels_clean_arch/features/domain/usecases/get_photos_usecase.dart';
 
-class HomeStore extends NotifierStore<Failure, List<PhotoEntity>> {
+class HomeStore extends Store<List<PhotoEntity>> {
   final GetPhotosUsecase usecase;
 
   HomeStore(this.usecase) : super([]);

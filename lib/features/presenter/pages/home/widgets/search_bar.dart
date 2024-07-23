@@ -47,7 +47,7 @@ class _SearchBarState extends State<SearchBar> {
             onPressed: () {
               getIt<HomeStore>().getPhotos(query: query);
             },
-            icon: const Icon(PhosphorIcons.magnifyingGlass),
+            icon: PhosphorIcon(PhosphorIcons.magnifyingGlass()),
           ),
         ),
       ),
